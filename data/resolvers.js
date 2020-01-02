@@ -22,13 +22,17 @@ class Client {
 const clientsDB = {};
 
 const resolvers = {
-    getClient: ({id}) => {
-        return new Client(id, clientsDB[id]);
+    Query: {
+        getClient: ({id}) => {
+            return new Client(id, clientsDB[id]);
+        },
     },
-    newClient: ({ form }) => {
-        const id = require('crypto').randomBytes(10).toString('hex');
-        clientsDB[id] = form;
-        return new Client(id, form);
+    Mutation: {
+        newClient: ({ form }) => {
+            const id = require('crypto').randomBytes(10).toString('hex');
+            clientsDB[id] = form;
+            return new Client(id, form);
+        },
     },
 };
 

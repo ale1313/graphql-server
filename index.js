@@ -3,8 +3,7 @@ import express from 'express';
 
 // GRAPHQL
 import graphqlHTTP from 'express-graphql';
-import schema from './schema';
-import resolvers from './resolvers';
+import schema from './data/schema';
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -16,7 +15,6 @@ app.get('/', (req, res) => {
 
 app.use('/graphql', graphqlHTTP({
     schema,
-    rootValue: resolvers,
     graphiql: true,
 }));
 
