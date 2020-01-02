@@ -11,7 +11,15 @@ app.get('/', (req, res) => {
     res.send('All ready');
 });
 
-const rootValue = { test: () => "Hello World!" };
+const rootValue = { client: () => {
+    return {
+        "id": 53453453535,
+        "name": "John",
+        "last_name": "Johnson",
+        "email": "johnjohnson@gmail.com",
+        "business": "Johnson & Co."
+    }
+} };
 
 app.use('/graphql', graphqlHTTP({
     schema,
