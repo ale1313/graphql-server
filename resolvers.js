@@ -2,14 +2,20 @@ class Client {
     constructor(id, {
         name,
         last_name,
-        email,
-        business
+        age,
+        emails,
+        business,
+        type,
+        orders
     }) {
         this.id = id;
         this.name = name;
         this.last_name = last_name;
-        this.email = email;
+        this.age = age;
+        this.emails = emails;
         this.business = business;
+        this.type = type;
+        this.orders = orders;
     };
 };
 
