@@ -5,12 +5,24 @@ const schema = buildSchema(`
         id: ID
         name: String
         last_name: String
-        email: String
+        emails: [Email]
         business: String
-
+    }
+    type Email {
+        email: String
     }
     type Query {
         client: Client
+    }
+    input ClientForm {
+        id: ID
+        name: String!
+        last_name: String!
+        email: String
+        business: String
+    }
+    type Mutation {
+        newClient(form: ClientForm) : Client
     }
 `);
 
