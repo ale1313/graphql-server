@@ -1,4 +1,7 @@
+// GRAPHQL
 import { buildSchema } from 'graphql';
+
+// ────────────────────────────────────────────────────────────────────────────────────────────────
 
 const schema = buildSchema(`
     type Client {
@@ -12,7 +15,7 @@ const schema = buildSchema(`
         email: String
     }
     type Query {
-        client: Client
+        getClient(id: ID): Client
     }
     input ClientForm {
         id: ID
@@ -22,7 +25,7 @@ const schema = buildSchema(`
         business: String
     }
     type Mutation {
-        newClient(form: ClientForm) : Client
+        newClient(form: ClientForm): Client
     }
 `);
 
