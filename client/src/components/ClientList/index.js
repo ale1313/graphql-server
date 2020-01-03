@@ -5,6 +5,9 @@ import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
 import { query as getClients } from '../../apollo/queries/getClients';
 
+// NAVIGATION
+import { Link } from 'react-router-dom';
+
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 const ClientList = () => (
@@ -14,7 +17,7 @@ const ClientList = () => (
             if (error) return `An error has ocurred\n${error.message}`;
             return (
                 <Fragment>
-                    <h2 className="text-center mt-4">Client List</h2>
+                    <h2 className="text-center">Client List</h2>
                     <ul className="list-group mt-4">
                         {data.getAllClients.map(item => (
                             <li key={item.id} className="list-group-item">
@@ -23,9 +26,9 @@ const ClientList = () => (
                                         {item.name} {item.last_name}
                                     </div>
                                     <div className="col-md-4 d-flex justify-content-end">
-                                        <a className="btn btn-success d-block d-md-inline-block">
+                                        <Link className="btn btn-success d-block d-md-inline-block" to={`/clients/edit/${item.id}`}>
                                             Edit
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </li>

@@ -1,12 +1,13 @@
 // REACT
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // GRAPHQL
-import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from 'apollo-boost';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // COMPONENTS
-import { Header, ClientList } from './components/';
+import { Header, ClientList, NewClient, EditClient } from './components/';
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -21,10 +22,18 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header/>
-      <div className="container">
-        <ClientList/>
-      </div>
+      <Router>
+        <Fragment>
+          <Header/>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={ClientList}/>
+              <Route exact path="/clients/new" component={NewClient}/>
+              <Route exact path="/clients/edit/:id" component={EditClient}/>
+            </Switch>
+          </div>
+        </Fragment>
+      </Router>
     </ApolloProvider>
   );
 };
