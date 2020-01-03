@@ -15,7 +15,6 @@ const resolvers = {
     Mutation: {
         createClient: (root, { form }) => {
             const newClient = new Clients({
-                id: form.id,
                 name: form.name,
                 last_name: form.last_name,
                 age: form.age,
@@ -25,10 +24,26 @@ const resolvers = {
                 orders: form.orders
             });
             newClient.id = newClient._id;
-            return new Promise((resolve, obj) => {
+            return new Promise((resolve, object) => {
                 newClient.save((error) => {
                     if (error) rejects(error);
                     else resolve(newClient);
+                });
+            });
+        },
+        updateClient: (root, { form }) => {
+            return new Promise((resolve, object) => {
+                Clients.findOneAndUpdate( { _id : form.id }, form, { new: true }, (error, client) => {
+                    if (error) rejects(error);
+                    else resolve(client);
+                });
+            });
+        },
+        deleteClient: (root, { id }) => {
+            return new Promise((resolve, object) => {
+                Clients.findOneAndRemove( { _id : id }, (error) => {
+                    if (error) rejects(error);
+                    else resolve("The operation was completed successfully");
                 });
             });
         },

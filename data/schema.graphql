@@ -43,4 +43,8 @@ input ClientForm {
 type Mutation {
     """Register a new client"""
     createClient(form: ClientForm): Client
+    """Update an existing client. If the client doesn't exists, the request creates a new one"""
+    updateClient(form: ClientForm): Client
+    """Delete an existing client"""
+    deleteClient(id: ID!): String
 }
