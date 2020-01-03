@@ -24,21 +24,21 @@ enum ClientType {
     PREMIUM
 }
 input EmailInput {
-    email: String
+    email: String!
 }
 input OrderInput {
-    product: String
-    quantity: Int
+    product: String!
+    quantity: Int!
 }
 input ClientForm {
     id: ID
     name: String!
     last_name: String!
     age: Int!
-    emails: EmailInput
+    emails: [EmailInput]
     business: String
     type: ClientType!
-    orders: OrderInput
+    orders: [OrderInput]
 }
 type Mutation {
     """Register a new client"""
