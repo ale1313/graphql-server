@@ -1,5 +1,5 @@
 // REACT
-import React from 'react';
+import React, { Fragment } from 'react';
 
 //GRAPHQL
 import { Query } from 'react-apollo';
@@ -12,9 +12,26 @@ const ClientList = () => (
         {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `An error has ocurred\n${error.message}`;
-            console.log(data);
             return (
-                <h2 className="text-center">Client List</h2>
+                <Fragment>
+                    <h2 className="text-center mt-4">Client List</h2>
+                    <ul className="list-group mt-4">
+                        {data.getAllClients.map(item => (
+                            <li key={item.id} className="list-group-item">
+                                <div className="row justify-content-between align-items-center">
+                                    <div className="col-md-8 d-flex justify-content-between align-items-center">
+                                        {item.name} {item.last_name}
+                                    </div>
+                                    <div className="col-md-4 d-flex justify-content-end">
+                                        <a className="btn btn-success d-block d-md-inline-block">
+                                            Edit
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </Fragment>
             )
         }}
     </Query>
