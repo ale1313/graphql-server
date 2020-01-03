@@ -42,5 +42,5 @@ input ClientForm {
 }
 type Mutation {
     """Register a new client"""
-    newClient(form: ClientForm): Client
+    createClient(form: ClientForm): Client
 }
