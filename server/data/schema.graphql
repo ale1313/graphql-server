@@ -3,7 +3,7 @@ type Client {
     name: String
     last_name: String
     age: Int
-    emails: [Email]
+    email: String
     business: String
     type: ClientType
     orders: [Order]
@@ -37,7 +37,7 @@ input ClientForm {
     name: String!
     last_name: String!
     age: Int!
-    emails: [EmailInput]
+    email: String
     business: String
     type: ClientType!
     orders: [OrderInput]
