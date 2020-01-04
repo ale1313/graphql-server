@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 const ClientList = () => (
-    <Query query={getClients}>
+    <Query query={getClients} pollInterval={1000}>
         {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `An error has ocurred\n${error.message}`;

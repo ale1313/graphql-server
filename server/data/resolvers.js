@@ -26,7 +26,7 @@ const resolvers = {
                 name: form.name,
                 last_name: form.last_name,
                 age: form.age,
-                email: form.email,
+                emails: form.emails,
                 business: form.business,
                 type: form.type,
                 orders: form.orders
