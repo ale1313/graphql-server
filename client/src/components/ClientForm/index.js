@@ -17,8 +17,20 @@ class ClientForm extends Component {
 
     componentDidMount() {
         const { comingFromEdit, data } = this.props;
-        if(comingFromEdit) this.setState({ form: data.getClient });
-        console.log(data)
+        if(comingFromEdit) {
+            const { id, name, last_name, age, business, type, emails } = data.getClient;
+            this.setState({
+                form: {
+                    id,
+                    name,
+                    last_name,
+                    age,
+                    business,
+                    type,
+                    emails: emails.map(item => ({ email: item.email })),
+                },
+            });
+        };
     };
 
     onChange = (e, index) => {
@@ -54,7 +66,7 @@ class ClientForm extends Component {
     };
 
     render() {
-        const { form } = this.state
+        const { form } = this.state;
         const { onSubmit, mutation, comingFromEdit } = this.props;
 
         return (
