@@ -1,10 +1,10 @@
 // GRAPHQL
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 export const query = gql`
-query getClient($id: ID) {
+  query getClient($id: ID) {
     getClient(id: $id) {
       id
       name
@@ -16,5 +16,5 @@ query getClient($id: ID) {
       }
       type
     }
-}
+  }
 `;
