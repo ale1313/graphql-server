@@ -18,18 +18,7 @@ class ClientForm extends Component {
     componentDidMount() {
         const { comingFromEdit, data } = this.props;
         if(comingFromEdit) {
-            const { id, name, last_name, age, business, type, emails } = data.getClient;
-            this.setState({
-                form: {
-                    id,
-                    name,
-                    last_name,
-                    age,
-                    business,
-                    type,
-                    emails: emails.map(item => ({ email: item.email })),
-                },
-            });
+            this.setState({form: data.getClient });
         };
     };
 
