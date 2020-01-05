@@ -1,5 +1,5 @@
 // REACT
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 
 //GRAPHQL
 import { Query, Mutation } from "react-apollo";
@@ -12,6 +12,12 @@ import { Link } from "react-router-dom";
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 class ClientList extends Component {
+  onDeleteClient = (mutation, id) => {
+    mutation({
+      variables: { id }
+    });
+  };
+
   render() {
     return (
       <Query query={getClients} pollInterval={1000}>
@@ -30,7 +36,7 @@ class ClientList extends Component {
                       </div>
                       <div className="col-md-4 d-flex justify-content-end">
                         <Mutation mutation={deleteClient}>
-                          {deleteClient(
+                          {deleteClient => (
                             <button
                               type="button"
                               className="btn btn-danger d-block d-md-inline-block mr-2"
