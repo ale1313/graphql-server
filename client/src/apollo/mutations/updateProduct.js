@@ -3,18 +3,13 @@ import gql from "graphql-tag";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
-export const query = gql`
-  query getClient($id: ID!) {
-    getClient(id: $id) {
+export const mutation = gql`
+  mutation updateProduct($form: ProductForm) {
+    updateProduct(form: $form) {
       id
       name
-      last_name
-      age
-      business
-      emails {
-        email
-      }
-      type
+      price
+      stock
     }
   }
 `;

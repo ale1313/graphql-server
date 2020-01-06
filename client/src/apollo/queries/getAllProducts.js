@@ -4,17 +4,13 @@ import gql from "graphql-tag";
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 export const query = gql`
-  query getClient($id: ID!) {
-    getClient(id: $id) {
+  query getAllProducts($limit: Int, $offset: Int) {
+    getAllProducts(limit: $limit, offset: $offset) {
       id
       name
-      last_name
-      age
-      business
-      emails {
-        email
-      }
-      type
+      price
+      stock
     }
+    totalProducts
   }
 `;

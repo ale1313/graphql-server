@@ -164,7 +164,7 @@ class ClientForm extends Component {
           </div>
         </div>
         <button type="submit" className="btn btn-success float-right">
-          {comingFromEdit ? "Update client" : "Add client"}
+          {comingFromEdit ? "Save changes" : "Add client"}
         </button>
       </form>
     );

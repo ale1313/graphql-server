@@ -3,14 +3,14 @@ import React, { Component, Fragment } from "react";
 
 // GRAPHQL
 import { Mutation } from "react-apollo";
-import { mutation as createClient } from "../../apollo/mutations/createClient";
+import { mutation as createProduct } from "../../apollo/mutations/createProduct";
 
 // COMPONENTS
-import ClientForm from "../ClientForm";
+import ProductForm from "../ProductForm";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
-class NewClient extends Component {
+class NewProduct extends Component {
   onSubmit = (e, mutation, form) => {
     e.preventDefault();
     mutation({
@@ -21,14 +21,14 @@ class NewClient extends Component {
   render() {
     return (
       <Fragment>
-        <h2 className="text-center">Add Client</h2>
+        <h2 className="text-center">Add Product</h2>
         <div className="row justify-content-center">
           <Mutation
-            mutation={createClient}
-            onCompleted={() => this.props.history.push("/clients")}
+            mutation={createProduct}
+            onCompleted={() => this.props.history.push("/products")}
           >
-            {createClient => (
-              <ClientForm onSubmit={this.onSubmit} mutation={createClient} />
+            {createProduct => (
+              <ProductForm onSubmit={this.onSubmit} mutation={createProduct} />
             )}
           </Mutation>
         </div>
@@ -37,4 +37,4 @@ class NewClient extends Component {
   }
 }
 
-export default NewClient;
+export default NewProduct;

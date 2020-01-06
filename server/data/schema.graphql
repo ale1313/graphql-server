@@ -8,6 +8,12 @@ type Client {
   type: ClientType
   orders: [Order]
 }
+type Product {
+  id: ID
+  name: String!
+  price: Int!
+  stock: Int!
+}
 type Email {
   email: String
 }
@@ -23,11 +29,23 @@ type Query {
   """
   Get an specific client
   """
-  getClient(id: ID): Client
+  getClient(id: ID!): Client
   """
   Get clients count
   """
   totalClients: String
+  """
+  Get products from server
+  """
+  getAllProducts(limit: Int, offset: Int): [Product]
+  """
+  Get an specific product
+  """
+  getProduct(id: ID!): Product
+  """
+  Get products count
+  """
+  totalProducts: String
 }
 enum ClientType {
   BASIC
@@ -50,6 +68,12 @@ input ClientForm {
   type: ClientType!
   orders: [OrderInput]
 }
+input ProductForm {
+  id: ID
+  name: String!
+  price: Int!
+  stock: Int!
+}
 type Mutation {
   """
   Register a new client
@@ -63,4 +87,16 @@ type Mutation {
   Delete an existing client
   """
   deleteClient(id: ID!): String
+  """
+  Create a new product
+  """
+  createProduct(form: ProductForm): Product
+  """
+  Update an existing product. If the product doesn't exists, the request creates a new one
+  """
+  updateProduct(form: ProductForm): Product
+  """
+  Delete an existing product
+  """
+  deleteProduct(id: ID!): String
 }

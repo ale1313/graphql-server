@@ -1,8 +1,9 @@
 // LIBS
 import mongoose from "mongoose";
+import rejects from "assert";
 
 // DATABASE
-import { Clients } from "./db";
+import { Clients, Products } from "./db";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -24,6 +25,27 @@ const resolvers = {
     totalClients: root => {
       return new Promise((resolve, object) => {
         Clients.countDocuments({}, (error, count) => {
+          if (error) rejects(error);
+          else resolve(count);
+        });
+      });
+    },
+    getAllProducts: (root, { limit, offset }) => {
+      return Products.find({})
+        .limit(limit)
+        .skip(offset);
+    },
+    getProduct: (root, { id }) => {
+      return new Promise((resolve, object) => {
+        Products.findById(id, (error, product) => {
+          if (error) rejects(error);
+          else resolve(product);
+        });
+      });
+    },
+    totalProducts: root => {
+      return new Promise((resolve, object) => {
+        Products.countDocuments({}, (error, count) => {
           if (error) rejects(error);
           else resolve(count);
         });
@@ -64,7 +86,42 @@ const resolvers = {
     },
     deleteClient: (root, { id }) => {
       return new Promise((resolve, object) => {
-        Clients.findOneAndRemove({ _id: id }, error => {
+        Clients.findOneAndDelete({ _id: id }, error => {
+          if (error) rejects(error);
+          else resolve("The operation was completed successfully");
+        });
+      });
+    },
+    createProduct: (root, { form }) => {
+      const newProduct = new Products({
+        name: form.name,
+        price: form.price,
+        stock: form.stock
+      });
+      newProduct.id = newProduct._id;
+      return new Promise((resolve, object) => {
+        newProduct.save(error => {
+          if (error) rejects(error);
+          else resolve(newProduct);
+        });
+      });
+    },
+    updateProduct: (root, { form }) => {
+      return new Promise((resolve, object) => {
+        Products.findOneAndUpdate(
+          { _id: form.id },
+          form,
+          { new: true },
+          (error, product) => {
+            if (error) rejects(error);
+            else resolve(product);
+          }
+        );
+      });
+    },
+    deleteProduct: (root, { id }) => {
+      return new Promise((resolve, object) => {
+        Products.findOneAndDelete({ _id: id }, error => {
           if (error) rejects(error);
           else resolve("The operation was completed successfully");
         });
