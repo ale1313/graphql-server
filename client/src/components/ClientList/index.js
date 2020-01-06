@@ -6,21 +6,47 @@ import { Query, Mutation } from "react-apollo";
 import { query as getClients } from "../../apollo/queries/getClients";
 import { mutation as deleteClient } from "../../apollo/mutations/deleteClient";
 
+// COMPONENTS
+import Pager from "../Pager";
+
 // NAVIGATION
 import { Link } from "react-router-dom";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
 class ClientList extends Component {
+  state = {
+    offset: 0,
+    page: 1
+  };
+
+  limit = 6;
+
   onDeleteClient = (mutation, id) => {
     mutation({
       variables: { id }
     });
   };
 
+  onClickPrevious = () => {
+    const { offset, page } = this.state;
+    this.setState({ offset: offset - this.limit, page: page - 1 });
+  };
+
+  onClickNext = () => {
+    const { offset, page } = this.state;
+    this.setState({ offset: offset + this.limit, page: page + 1 });
+  };
+
   render() {
+    const { offset, page } = this.state;
+
     return (
-      <Query query={getClients} pollInterval={1000}>
+      <Query
+        query={getClients}
+        variables={{ limit: this.limit, offset }}
+        pollInterval={1000}
+      >
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `An error has ocurred\n${error.message}`;
@@ -59,6 +85,13 @@ class ClientList extends Component {
                   </li>
                 ))}
               </ul>
+              <Pager
+                page={page}
+                total={data.totalClients}
+                limit={this.limit}
+                previousPage={this.onClickPrevious}
+                nextPage={this.onClickNext}
+              />
             </Fragment>
           );
         }}

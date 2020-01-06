@@ -1,52 +1,66 @@
 type Client {
-    id: ID
-    name: String
-    last_name: String
-    age: Int
-    emails: [Email]
-    business: String
-    type: ClientType
-    orders: [Order]
+  id: ID
+  name: String
+  last_name: String
+  age: Int
+  emails: [Email]
+  business: String
+  type: ClientType
+  orders: [Order]
 }
 type Email {
-    email: String
+  email: String
 }
 type Order {
-    product: String
-    quantity: Int
+  product: String
+  quantity: Int
 }
 type Query {
-    """Get clients from server"""
-    getAllClients(limit: Int): [Client]
-    """Get an specific client"""
-    getClient(id: ID): Client
+  """
+  Get clients from server
+  """
+  getAllClients(limit: Int, offset: Int): [Client]
+  """
+  Get an specific client
+  """
+  getClient(id: ID): Client
+  """
+  Get clients count
+  """
+  totalClients: String
 }
 enum ClientType {
-    BASIC
-    PREMIUM
+  BASIC
+  PREMIUM
 }
 input EmailInput {
-    email: String!
+  email: String!
 }
 input OrderInput {
-    product: String!
-    quantity: Int!
+  product: String!
+  quantity: Int!
 }
 input ClientForm {
-    id: ID
-    name: String!
-    last_name: String!
-    age: Int!
-    emails: [EmailInput]
-    business: String
-    type: ClientType!
-    orders: [OrderInput]
+  id: ID
+  name: String!
+  last_name: String!
+  age: Int!
+  emails: [EmailInput]
+  business: String
+  type: ClientType!
+  orders: [OrderInput]
 }
 type Mutation {
-    """Register a new client"""
-    createClient(form: ClientForm): Client
-    """Update an existing client. If the client doesn't exists, the request creates a new one"""
-    updateClient(form: ClientForm): Client
-    """Delete an existing client"""
-    deleteClient(id: ID!): String
+  """
+  Register a new client
+  """
+  createClient(form: ClientForm): Client
+  """
+  Update an existing client. If the client doesn't exists, the request creates a new one
+  """
+  updateClient(form: ClientForm): Client
+  """
+  Delete an existing client
+  """
+  deleteClient(id: ID!): String
 }

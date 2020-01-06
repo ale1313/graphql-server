@@ -8,14 +8,24 @@ import { Clients } from "./db";
 
 const resolvers = {
   Query: {
-    getAllClients: (root, { limit }) => {
-      return Clients.find({}).limit(limit);
+    getAllClients: (root, { limit, offset }) => {
+      return Clients.find({})
+        .limit(limit)
+        .skip(offset);
     },
     getClient: (root, { id }) => {
       return new Promise((resolve, object) => {
         Clients.findById(id, (error, client) => {
           if (error) rejects(error);
           else resolve(client);
+        });
+      });
+    },
+    totalClients: root => {
+      return new Promise((resolve, object) => {
+        Clients.countDocuments({}, (error, count) => {
+          if (error) rejects(error);
+          else resolve(count);
         });
       });
     }
