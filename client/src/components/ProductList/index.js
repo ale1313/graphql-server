@@ -67,7 +67,7 @@ class ProductList extends Component {
                   {data.getAllProducts.map(item => (
                     <tr key={item.id}>
                       <td>{item.name}</td>
-                      <td>{item.price}</td>
+                      <td>{`$${item.price.toLocaleString()}`}</td>
                       <td>{item.stock}</td>
                       <td>
                         <Mutation mutation={deleteProduct}>
@@ -79,7 +79,7 @@ class ProductList extends Component {
                                 this.onDeleteProduct(deleteProduct, item.id)
                               }
                             >
-                              &times; delete
+                              &times; Delete
                             </button>
                           )}
                         </Mutation>

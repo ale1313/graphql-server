@@ -11,3 +11,6 @@ export { default as ClientForm } from "./ClientForm";
 export { default as ProductList } from "./ProductList";
 export { default as NewProduct } from "./NewProduct";
 export { default as EditProduct } from "./EditProduct";
+
+// ORDERS
+export { default as NewOrder } from "./NewOrder";

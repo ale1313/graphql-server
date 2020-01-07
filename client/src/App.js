@@ -14,7 +14,8 @@ import {
   NewClient,
   NewProduct,
   EditClient,
-  EditProduct
+  EditProduct,
+  NewOrder
 } from "./components";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ function App() {
               <Route exact path="/products/new" component={NewProduct} />
               <Route exact path="/clients/edit/:id" component={EditClient} />
               <Route exact path="/products/edit/:id" component={EditProduct} />
+              <Route exact path="/orders/new/:id" component={NewOrder} />
             </Switch>
           </div>
         </Fragment>
