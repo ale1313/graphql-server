@@ -8,6 +8,7 @@ import { mutation as updateClient } from "../../apollo/mutations/updateClient";
 
 // COMPONENTS
 import ClientForm from "../ClientForm";
+import Spinner from "../Spinner";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -27,7 +28,7 @@ class EditClient extends Component {
         <h2 className="text-center">Edit Client</h2>
         <Query query={getClient} variables={{ id }}>
           {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <Spinner />;
             if (error) return `An error has ocurred\n${error.message}`;
             return (
               <div className="row justify-content-center">

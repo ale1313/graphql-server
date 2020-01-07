@@ -8,6 +8,7 @@ import { mutation as updateProduct } from "../../apollo/mutations/updateProduct"
 
 // COMPONENTS
 import ProductForm from "../ProductForm";
+import Spinner from "../Spinner";
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -27,7 +28,7 @@ class EditProduct extends Component {
         <h2 className="text-center">Edit Product</h2>
         <Query query={getProduct} variables={{ id }}>
           {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <Spinner />;
             if (error) return `An error has ocurred\n${error.message}`;
             return (
               <div className="row justify-content-center">

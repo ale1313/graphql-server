@@ -8,6 +8,7 @@ import { mutation as deleteClient } from "../../apollo/mutations/deleteClient";
 
 // COMPONENTS
 import Pager from "../Pager";
+import Spinner from "../Spinner";
 
 // NAVIGATION
 import { Link } from "react-router-dom";
@@ -48,7 +49,7 @@ class ClientList extends Component {
         pollInterval={1000}
       >
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <Spinner />;
           if (error) return `An error has ocurred\n${error.message}`;
           return (
             <Fragment>

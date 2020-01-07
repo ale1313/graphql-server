@@ -5,6 +5,9 @@ import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { query as getClient } from "../../apollo/queries/getClient";
 
+// COMPONENTS
+import Spinner from "../Spinner";
+
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 const ClientCard = props => {
   const { id } = props;
@@ -14,7 +17,7 @@ const ClientCard = props => {
       <h2 className="text-center mb-5">Client Data</h2>
       <Query query={getClient} variables={{ id }}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <Spinner />;
           if (error) return `An error has ocurred\n${error.message}`;
 
           const {
