@@ -7,7 +7,7 @@ class Pager extends Component {
 
   render() {
     const { pages } = this.state;
-    const { page, total, limit, previousPage, nextPage } = this.props;
+    const { page, previousPage, nextPage } = this.props;
 
     return (
       <div className="mt-5 d-flex justify-content-center">

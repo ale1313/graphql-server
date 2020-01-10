@@ -44,11 +44,10 @@ const ClientCard = props => {
               <li className="border font-weight-bold p-2">
                 Emails:
                 <br />
-                {emails.map(item => (
-                  <Fragment>
-                    <span className="font-weight-normal">{item.email}</span>
-                    <br />
-                  </Fragment>
+                {emails.map((item, index) => (
+                  <span key={index} className="font-weight-normal d-block">
+                    {item.email}
+                  </span>
                 ))}
               </li>
               <li className="border font-weight-bold p-2">
