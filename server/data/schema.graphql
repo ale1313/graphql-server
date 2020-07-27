@@ -14,12 +14,16 @@ type Product {
   price: Int!
   stock: Int!
 }
+type Order {
+  id: ID
+  order: [ProductOrder]!
+  total: Number!
+  date: String!
+  client: String!
+  state: OrderState!
+}
 type Email {
   email: String
-}
-type Order {
-  product: String
-  quantity: Int
 }
 type Query {
   """
@@ -74,6 +78,23 @@ input ProductForm {
   price: Int!
   stock: Int!
 }
+input ProductOrder {
+  id: ID
+  quantity: Number
+}
+input OrderForm {
+  id: ID
+  order: [ProductOrder]!
+  total: Number!
+  date: String!
+  client: String!
+  state: OrderState!
+}
+enum OrderState {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
 type Mutation {
   """
   Register a new client
@@ -99,4 +120,8 @@ type Mutation {
   Delete an existing product
   """
   deleteProduct(id: ID!): String
+  """
+  Create a new order
+  """
+  createOrder(form: OrderForm): Order
 }

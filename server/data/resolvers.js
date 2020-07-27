@@ -126,6 +126,22 @@ const resolvers = {
           else resolve("The operation was completed successfully");
         });
       });
+    },
+    newOrder: (root, { form }) => {
+      const newOrder = new Orders({
+        order: form.order,
+        total: form.total,
+        date: new Date(),
+        client: form.client,
+        state: "PENDING"
+      });
+      newOrder.id = newOrder._id;
+      return new Promise((resolve, object) => {
+        newOrder.save(error => {
+          if (error) rejects(error);
+          else resolve(newOrder);
+        });
+      });
     }
   }
 };
